@@ -14,6 +14,11 @@ class LOOP:
         pass
 
 
+class COMMA:
+    def __init__(self):
+        pass
+
+
 class FUNCTION:
     def __init__(self, name, params, code):
         self.name = name

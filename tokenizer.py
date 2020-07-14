@@ -45,7 +45,7 @@ class Tokenizer:
         for line in lines:
             parentheses_counter += line.count('(')
             parentheses_counter -= line.count(')')
-            line_holder += line.replace('    ', '~').replace("\n", " # ")
+            line_holder += line.replace('    ', '~').replace("\n", " \n ")
             if parentheses_counter == 0:
                 clumped_lines.append(line_holder)
                 line_holder = ''
