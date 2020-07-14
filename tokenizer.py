@@ -21,12 +21,23 @@ class Tokenizer:
         with open(msfile, 'r') as file:
             lines = file.readlines()
 
-        # Remove all comments
-        for index in range(len(lines)):
-
-
+        # Remove one-line comments
         for index in range(len(lines)):
             if lines[index].startswith('//'):
+                lines[index] = ''
+
+        # Remove Multi-line comments
+        is_comment = False
+        for index in range(len(lines)):
+            if lines[index].startswith('/*') and not is_comment:
+                is_comment = True
+
+            if lines[index].endswith('*/\n') and is_comment:
+                is_comment = False
+
+            if is_comment:
+                lines[index] = ''
+            elif '/*' in lines[index] and '*/' in lines[index]:
                 lines[index] = ''
 
         # Remove all empty lines from the list
