@@ -4,5 +4,5 @@ import pprint
 
 interpreter = Tokenizer()
 
-print(interpreter.format('mantis.ms'))
+pprint.pprint(interpreter.format('mantis.ms'))
 

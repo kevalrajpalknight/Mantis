@@ -11,10 +11,8 @@ class Tokenizer:
             'import': tokens.IMPORT,
             'loop': tokens.LOOP,
             'function': tokens.FUNCTION,
-            'func': tokens.FUNCTION,
-            'raise': tokens.Error,
-            'error': tokens.Error
-            }
+            'raise': tokens.Error
+        }
 
     @staticmethod
     def format(msfile: str):
@@ -22,30 +20,18 @@ class Tokenizer:
         with open(msfile, 'r') as file:
             lines = file.readlines()
 
-        # Remove comments from lines
-        for line in lines:
-            if '#' in line:
-                lines[line] = line[:line.find('#')]
-
-        is_comment = False
-        for line in lines:
-            if '///' in line:
-                lines[line] = line[line.find('///'):]
-                is_comment = -is_comment
-            elif is_comment:
-                lines[line] = ''
+        # Remove all comments
+        for index in range(len(lines)):
+            if lines[index].startswith('//'):
+                lines[index] = ''
 
         # Remove all empty lines from the list
         while '\n' in lines:
             lines.remove('\n')
+        while '' in lines:
+            lines.remove('')
 
         # Get the processed version of the lines.
         lines = [line.split() for line in lines]
 
-        action_tree = []
-
-        for line in lines:
-            action_tree += line
-            action_tree += ['\n']
-
-        return " ".join(action_tree)
+        return lines

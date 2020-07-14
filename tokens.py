@@ -4,7 +4,7 @@ class Token:
 
 
 # Language Keywords
-class IF_STATEMENT:
+class IF:
     def __init__(self, statement):
         pass
 
@@ -19,7 +19,7 @@ class FUNCTION:
         pass
 
 
-# *+-=:()[]}{|~, etc.
+# *+-/
 class OPERATION:
     def __init__(self):
         pass
