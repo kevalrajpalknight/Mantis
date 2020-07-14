@@ -13,6 +13,6 @@ class Error:
             string = item + ': ' + location.get(item)
             location_list.append(string)
         location_str = ', '.join(location_list)
-        msg = type_err + ": found at " + location_str + ", lines where error ocurred: \n" + "\n".join(lines) + "\n Additional information: " + traceback
+        msg = type_err + ": found at " + location_str + ", lines where error occurred: \n" + "\n".join(lines) + "\n Additional information: " + traceback
         error_print(msg)
         sys.exit()
