@@ -3,16 +3,16 @@ import tokens
 
 class Tokenizer:
     @staticmethod
-    def tokenize(msfile: str):
-        file = Tokenizer.format(msfile)
+    def tokenize(ms_file: str):
+        file = Tokenizer.format(ms_file)
 
         for file_line_number in range(len(file)):
             pass
 
     @staticmethod
-    def format(msfile: str):
+    def format(ms_file: str):
         # Get lines from file.
-        with open(msfile, 'r') as file:
+        with open(ms_file, 'r') as file:
             lines = file.readlines()
 
         # Remove one-line comments
