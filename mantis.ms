@@ -9,7 +9,7 @@ loop i -- range(37) (
 )
 
 output(location.line)
-// COMMENT
+# COMMENT
 
 /*
 Multi

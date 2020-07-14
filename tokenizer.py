@@ -4,16 +4,10 @@ import tokens
 class Tokenizer:
     @staticmethod
     def tokenize(msfile: str):
-        keywords = {
-            'if': tokens.IF,
-            'el-if': tokens.IF,
-            'else': tokens.IF,
-            'import': tokens.IMPORT,
-            'loop': tokens.LOOP,
-            'function': tokens.FUNCTION
-        }
+        file = Tokenizer.format(msfile)
 
-
+        for file_line_number in range(len(file)):
+            pass
 
     @staticmethod
     def format(msfile: str):
@@ -23,7 +17,7 @@ class Tokenizer:
 
         # Remove one-line comments
         for index in range(len(lines)):
-            if lines[index].startswith('//'):
+            if lines[index].startswith('#'):
                 lines[index] = ''
 
         # Remove Multi-line comments
@@ -46,7 +40,23 @@ class Tokenizer:
         while '' in lines:
             lines.remove('')
 
-        # Get the processed version of the lines.
-        lines = [line.split() for line in lines]
+        # Compress formatted file to code segments for tokenizing
+        parentheses_counter, clumped_lines, line_holder = 0, [], ''
+        for line in lines:
+            parentheses_counter += line.count('(')
+            parentheses_counter -= line.count(')')
+            line_holder += line
+            if parentheses_counter == 0:
+                clumped_lines.append(line_holder)
+                line_holder = ''
 
-        return lines
+        return clumped_lines
+
+    def is_variable_definition(self, line):
+        pass
+
+    def is_variable_reference(self, file_globals):
+        pass
+
+    def tokenize_line(self, line):
+        pass
