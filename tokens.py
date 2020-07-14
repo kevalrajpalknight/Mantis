@@ -9,6 +9,11 @@ class IF:
         pass
 
 
+class ELSE:
+    def __init__(self, statement):
+        pass
+
+
 class LOOP:
     pass
 

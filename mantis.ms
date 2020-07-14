@@ -13,6 +13,6 @@ output(location.line)
 
 loop char: str "qwertyuiopasdfghjklzxcvbnm" (
     output(loop.step)
-    if loop.curr_step == 'n':
-        output(f'On letter [loop.cuur_step]')
+    if loop.step == 'n':
+        output(f'On letter [loop.step]')
 )
