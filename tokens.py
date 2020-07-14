@@ -9,17 +9,29 @@ class IF:
         pass
 
 
+class ELIF:
+    def __init__(self, statement):
+        pass
+
+
 class ELSE:
     def __init__(self, statement):
         pass
 
 
 class LOOP:
-    pass
+    def __init__(self):
+        pass
+
+
+class WHILE:
+    def __init__(self):
+        pass
 
 
 class FUNCTION:
-    pass
+    def __init__(self):
+        pass
 
 
 class IMPORT:
@@ -29,12 +41,14 @@ class IMPORT:
 
 # Define Variable functionality
 class VARIABLE:
-    pass
+    def __init__(self):
+        pass
 
 
 # Define Builtin Objects
 class OBJECT:
-    pass
+    def __init__(self):
+        pass
 
 
 class Num(OBJECT):
@@ -45,7 +59,18 @@ class Str(OBJECT):
     pass
 
 
+class List(OBJECT):
+    pass
+
+
+class Open(OBJECT):
+    pass
+
+
 # Error System
 class Error:
+    def __init__(self):
+        pass
+
     def find_traceback(self):
         pass
