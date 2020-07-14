@@ -31,7 +31,7 @@ class Tokenizer:
 
             if is_comment:
                 lines[index] = ''
-            elif '/*' in lines[index] and '*/' in lines[index]:
+            elif '/*' in lines[index] or '*/' in lines[index]:
                 lines[index] = ''
 
         # Remove all empty lines from the list
