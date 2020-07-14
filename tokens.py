@@ -4,17 +4,7 @@ class Token:
 
 
 # Language Keywords
-class IF:
-    def __init__(self, statement):
-        pass
-
-
-class ELIF:
-    def __init__(self, statement):
-        pass
-
-
-class ELSE:
+class IF_STATEMENT:
     def __init__(self, statement):
         pass
 
@@ -24,17 +14,15 @@ class LOOP:
         pass
 
 
-class WHILE:
-    def __init__(self):
-        pass
-
-
 class FUNCTION:
     def __init__(self):
         pass
 
 
-
+# *+-=:()[]}{|~, etc.
+class OPERATION:
+    def __init__(self):
+        pass
 
 
 class IMPORT:
@@ -54,20 +42,9 @@ class OBJECT:
         pass
 
 
-class Num(OBJECT):
-    pass
-
-
-class Str(OBJECT):
-    pass
-
-
-class List(OBJECT):
-    pass
-
-
-class Open(OBJECT):
-    pass
+class PARAM:
+    def __init__(self):
+        pass
 
 
 # Error System
