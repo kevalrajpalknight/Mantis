@@ -9,7 +9,13 @@ loop i -- range(37) (
 )
 
 output(location.line)
+// COMMENT
 
+// COMMENT //
+
+///
+COMENT
+///
 
 loop char from "qwertyuiopasdfghjklzxcvbnm" (
     output(loop.step)

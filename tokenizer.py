@@ -5,14 +5,15 @@ class Tokenizer:
     @staticmethod
     def tokenize(msfile: str):
         keywords = {
-            'if': tokens.IF_STATEMENT,
-            'el-if': tokens.IF_STATEMENT,
-            'else': tokens.IF_STATEMENT,
+            'if': tokens.IF,
+            'el-if': tokens.IF,
+            'else': tokens.IF,
             'import': tokens.IMPORT,
             'loop': tokens.LOOP,
-            'function': tokens.FUNCTION,
-            'raise': tokens.Error
+            'function': tokens.FUNCTION
         }
+
+
 
     @staticmethod
     def format(msfile: str):
@@ -21,6 +22,9 @@ class Tokenizer:
             lines = file.readlines()
 
         # Remove all comments
+        for index in range(len(lines)):
+
+
         for index in range(len(lines)):
             if lines[index].startswith('//'):
                 lines[index] = ''

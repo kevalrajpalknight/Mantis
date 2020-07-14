@@ -36,21 +36,28 @@ class VARIABLE:
         pass
 
 
-# Define Builtin Objects
-class OBJECT:
-    def __init__(self):
-        pass
+# Define Builtin objects
+class Object:
+    pass
 
 
-class PARAM:
-    def __init__(self):
-        pass
+class Str(Object):
+    pass
+
+
+class Num(Object):
+    pass
+
+
+class List(Object):
+    pass
+
+
+class Dict(Object):
+    pass
 
 
 # Error System
 class Error:
-    def __init__(self):
-        pass
-
     def find_traceback(self):
         pass
