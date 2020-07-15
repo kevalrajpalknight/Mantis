@@ -29,7 +29,7 @@ class FUNCTION:
         return f"{self.__class__.__name__} {self.name} -- {self.params} (\n{self.code}\n"
 
 
-# *+-/
+# *+-/== or and != <= >=
 class OPERATION:
     def __init__(self, type):
         self.type = type
