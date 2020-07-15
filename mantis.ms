@@ -31,3 +31,6 @@ list_of_nums = [1, 2, 3, 4, 5, 6]
 2*all to list_of_nums.all
 
 output(list_of_nums)
+
+# Here we will use input() to, well, get an input
+output(input('Say something:'))

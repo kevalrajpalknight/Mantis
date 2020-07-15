@@ -17,8 +17,8 @@ class Tokenizer:
 
         # Remove one-line comments
         for index in range(len(lines)):
-            if lines[index].startswith('#'):
-                lines[index] = ''
+            if '#' in lines[index]:
+                lines[index] = lines[index][:lines[index].find('#')]
 
         # Remove Multi-line comments
         is_comment = False
