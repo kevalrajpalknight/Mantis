@@ -1,38 +1,71 @@
 from errors import SyntaxErr
 
-def get_token(chunk):
-    _syntax = {
+
+def get_tokens(chunk):
+    _keywords = {
         'if': IF,
         'loop': LOOP,
         'function': FUNCTION,
+        'output': OUTPUT,
+        'input': INPUT,
+        'pass': PASS
+    }
+
+    _exts = {
         '+': OPERATION,
         '-': OPERATION,
         '*': OPERATION,
         '/': OPERATION,
-        'output': OUTPUT,
-        'input': INPUT
+        '<=': COMPARISON,
+        '>=': COMPARISON,
+        '==': COMPARISON,
+        '!=': COMPARISON,
+        '=>': COMPARISON,
+        '=<': COMPARISON,
     }
 
-    for element in chunk:
+    tokens = {
+        'variables': {},
+        'action_tree': []
+    }
 
+    def set_variable(name, value):
+        tokens['variables'][name] = value
+
+    if chunk[0] in _keywords:
+        # How many values to initialize the token object with.
+        req_args_count = _keywords[chunk[0]].__init__.__code__.co_argcount - 1
+        # Take things from chunk and assign to initalization of the token object
+        pass
+
+    elif chunk[1] == '=':
+        # Set Variable name {chunk[0]} to {chunk[2]}
+        set_variable(chunk[0], chunk[2])
+
+    return tokens
 
 
 # Language Keywords
 class IF:
-    def __init__(self, boolean, code):
+    def __init__(self, boolean, tokens):
         pass
 
 
 class LOOP:
-    def __init__(self, iterable, code):
+    def __init__(self, iterable, tokens):
         pass
 
     def _exec(self):
         pass
 
 
+class PASS:
+    def _exec(self):
+        pass
+
+
 class FUNCTION:
-    def __init__(self, name, params, code):
+    def __init__(self, name, params, tokens):
         self.name = name
         self.params = params
         self.code = code
@@ -76,6 +109,7 @@ class COMPARISON:
         self.comparitor = comparitor
 
     def _exec(self):
+        pass
 
 class OUTPUT:
     def __init__(self, output):
@@ -105,23 +139,9 @@ class VARIABLE:
         return f"{self.__class__.__name__} {self.name} of value {self.value}"
 
 
-# Define Builtin objects
+# Define Mantis Object for Standard Library to utilize
 class Object:
     pass
 
 
-class Str(Object):
-    def __init__(self, string):
-        self.string = string
-
-    def __repr__(self):
-        return f"{self.__class__.__name__} {self.string}"
-
-
-class Num(Object):
-    def __init__(self, number):
-        self.number = number
-
-    def __repr__(self):
-        return f"{self.__class__.__name__} {self.number}"
 

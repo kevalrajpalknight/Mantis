@@ -1,8 +1,8 @@
-from tokenizer import Tokenizer
+from tokenizer import Interpeter
 
-import tokenizer
+interpreter = Interpeter()
 
-interpreter = Tokenizer()
+print(interpreter.tokenize('mantis.ms'))
 
-interpreter.tokenize('mantis.ms')
+
 

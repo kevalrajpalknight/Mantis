@@ -1,20 +1,24 @@
 import tokens
 
 
-class Tokenizer:
+class Interpeter:
     @staticmethod
     def tokenize(ms_file: str):
         """Formatted file"""
-        ff = [" ".join(line.split()) for line in Tokenizer.format(ms_file)]
+        ff = [" ".join(line.split()) for line in Interpeter.format(ms_file)]
 
-        _memory = {
+        _memory = {}
 
-        }
+        for chunk in ff:
+            chunk_tokens = tokens.get_tokens(chunk)
+            print(chunk_tokens)
 
-        print(ff)
+            for key in chunk_tokens['variables']:
+                _memory['variables'][key] = chunk_tokens['variables'][key]
 
+            _memory['action_tree'] += chunk_tokens['action_tree']
 
-
+        return _memory
 
     @staticmethod
     def format(ms_file: str):
@@ -54,7 +58,6 @@ class Tokenizer:
             parentheses_counter -= line.count(')')
             line_holder += line
             if parentheses_counter == 0:
-                print(line_holder)
                 clumped_lines.append(
                     line_holder
                         .strip('\n')
@@ -65,7 +68,3 @@ class Tokenizer:
                 line_holder = ''
 
         return clumped_lines
-
-
-
-
