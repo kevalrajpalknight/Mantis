@@ -1,4 +1,5 @@
 import tokens as tkns
+import json
 
 
 class Tokenizer:
@@ -11,7 +12,7 @@ class Tokenizer:
 
         for line_num in range(len(ff)):
             components = ff[line_num].split()
-            tokens.append(Tokenizer.tokenize_line(components=components))
+            tokens.append(Tokenizer.tokenize_line(lines=components))
 
     @staticmethod
     def format(ms_file: str):
@@ -52,18 +53,21 @@ class Tokenizer:
             line_holder += line
             if parentheses_counter == 0:
                 clumped_lines.append(line_holder.replace('    ',
-                                                         '~').replace("\n",
-                                                                      " \n ").replace(')',
-                                                                                      ' ) ').replace('(',
-                                                                                                     ' ( '))
+                                                         '~'
+                                                         ).replace("\n",
+                                                                   " \n "
+                                                                   ).replace(')',
+                                                                             ' ) '
+                                                                             ).replace('(',
+                                                                                       ' ( '
+                                                                                       ).replace(',',
+                                                                                                 ' , '))
                 line_holder = ''
 
         return clumped_lines
 
-    def is_variable_definition(self, line):
-        pass
-
-    def is_variable_reference(self, file_globals):
+    @staticmethod
+    def is_variable_reference(file_globals):
         pass
 
     @staticmethod
@@ -84,10 +88,22 @@ class Tokenizer:
         return separated
 
     @staticmethod
-    def tokenize_line(self, components):
-        keywords = {
-            'if': tkns.IF
-        }
+    def is_variable_definition(line):
+        line = Tokenizer.find_ops('=', line)
+        if '=' in line:
+            name_index = line.index('=') - 1
+            name = line[name_index].split()[-1]
+            value = line[name_index+2].split()[0]
+            return {name: value}
+        else:
+            return False
+
+    @staticmethod
+    def tokenize_line(lines):
+        with open('keywords.json', 'r') as FileData:
+            keywords = json.load(FileData)
         tokenized_line = ''
+        for line in lines:
+            pass
 
         return tokenized_line

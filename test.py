@@ -7,7 +7,7 @@ interpreter = Tokenizer()
 
 interpreter.tokenize('mantis.ms')
 
-print(tokenizer.find_ops(['i', 'b'], 'ibis loves to go boating'))
+print(Tokenizer.is_variable_definition('Hello=Floof Hallo'))
 
 error = Error('ByeeeeeError',
               {'test.py': 'line 9', 'error.py': 'line 18'},
