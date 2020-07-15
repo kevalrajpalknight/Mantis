@@ -1,21 +1,33 @@
-class Token:
-    def __init__(self):
-        pass
+from errors import SyntaxErr
+
+def assign_token(chunk):
+
+    _syntax = {
+        'if': IF,
+        'loop': LOOP,
+        'function': FUNCTION,
+        '+': OPERATION,
+        '-': OPERATION,
+        '*': OPERATION,
+        '/': OPERATION,
+        'output':
+    }
+
+    for element in chunk:
+
 
 
 # Language Keywords
 class IF:
-    def __init__(self, statement):
+    def __init__(self, boolean, code):
         pass
 
 
 class LOOP:
-    def __init__(self, ):
+    def __init__(self, iterable, code):
         pass
 
-
-class COMMA:
-    def __init__(self):
+    def _exec(self):
         pass
 
 
@@ -29,21 +41,48 @@ class FUNCTION:
         return f"{self.__class__.__name__} {self.name} -- {self.params} (\n{self.code}\n"
 
 
-# *+-/== or and != <= >=
+# *+-/
 class OPERATION:
-    def __init__(self, type):
-        self.type = type
+    def __init__(self, objects, operation):
+        if len(objects) != 2:
+            SyntaxErr(f'Cannot {operation} with {" ".join(objects)}')
+
+        if operation not in ['*', '/', '+', '-']:
+            SyntaxErr(f"{operation} isn't a valid operation.")
+
+        self.objects = objects
+        self.op = operation
 
     def __repr__(self):
-        return f"{self.__class__.__name__} {self.type}\n"
+        return f"{self.__class__.__name__} {self.op}\n"
+
+    def _exec(self):
+        ops = {
+            '*': '__mul__(%s)',
+            '/': '__div__(%s)',
+            '+': '__add__(%s)',
+            '-': '__sub__(%s)'
+        }
 
 
-class IMPORT:
-    def __init__(self, package_name):
-        self.package_name = package_name
 
-    def __repr__(self):
-        return f"{self.__class__.__name__} {self.package_name}\n"
+# == >= <= < > !=
+class COMPARISON:
+    def __init__(self, objects, comparitor):
+        if len(objects) != 2:
+            Error(f'Cannot compare {" ".join(objects)} with {comparitor}')
+
+        self.objects = objects
+        self.comparitor = comparitor
+
+    def _exec(self):
+
+class OUTPUT:
+    def __init__(self, output):
+        self.output = output
+
+    def _exec(self):
+        print(self.output)
 
 
 # Define Variable functionality
@@ -94,3 +133,4 @@ class Dict(Object):
 
     def __repr__(self):
         return f"{self.__class__.__name__} {self.__dict__()}"
+

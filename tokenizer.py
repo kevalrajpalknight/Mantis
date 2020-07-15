@@ -1,34 +1,25 @@
 import tokens
 
 
-def find_ops(ops: list, segment):
-    separated = []
-    char_holder = ''
-    for char in segment:
-        if char in ops:
-            if char_holder:
-                separated.append(char_holder)
-                char_holder = ''
-            separated.append(char)
-        else:
-            char_holder += char
-    if char_holder:
-        separated.append(char_holder)
-
-    return separated
-
-
 class Tokenizer:
     @staticmethod
     def tokenize(ms_file: str):
         """Formatted file"""
-        ff = Tokenizer.format(ms_file)
+        ff = [" ".join(line.split()) for line in Tokenizer.format(ms_file)]
 
-        tokens= []
+        _memory = {
 
-        for line_num in range(len(ff)):
-            components = ff[line_num].split()
-            tokens.append(Tokenizer.tokenize_line(components))
+        }
+
+        _syntax = {
+            'if': tokens.IF,
+
+        }
+
+        print(ff)
+
+
+
 
     @staticmethod
     def format(ms_file: str):
@@ -68,24 +59,18 @@ class Tokenizer:
             parentheses_counter -= line.count(')')
             line_holder += line
             if parentheses_counter == 0:
-                clumped_lines.append(line_holder.replace('    ',
-                                                         '~').replace("\n",
-                                                                      " \n ").replace(')',
-                                                                                      ' ) ').replace('(',
-                                                                                                     ' ( '))
+                print(line_holder)
+                clumped_lines.append(
+                    line_holder
+                        .strip('\n')
+                        .replace('(', ' ( ')
+                        .replace(')', ' ) ')
+                        .replace('    ', '... ')
+                )
                 line_holder = ''
 
         return clumped_lines
 
-    def is_variable_definition(self, line):
-        pass
 
-    def is_variable_reference(self, file_globals):
-        pass
 
-    def tokenize_line(self, components):
-        keywords = {
-            'if': tokens.IF
-        }
 
-        return tokenized_line
