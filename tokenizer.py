@@ -1,6 +1,23 @@
 import tokens
 
 
+def find_ops(ops: list, segment):
+    separated = []
+    char_holder = ''
+    for char in segment:
+        if char in ops:
+            if char_holder:
+                separated.append(char_holder)
+                char_holder = ''
+            separated.append(char)
+        else:
+            char_holder += char
+    if char_holder:
+        separated.append(char_holder)
+
+    return separated
+
+
 class Tokenizer:
     @staticmethod
     def tokenize(ms_file: str):
@@ -21,8 +38,8 @@ class Tokenizer:
 
         # Remove one-line comments
         for index in range(len(lines)):
-            if lines[index].startswith('#'):
-                lines[index] = ''
+            if '#' in lines[index]:
+                lines[index] = lines[index][:lines[index].find('#')]
 
         # Remove Multi-line comments
         is_comment = False
@@ -49,9 +66,13 @@ class Tokenizer:
         for line in lines:
             parentheses_counter += line.count('(')
             parentheses_counter -= line.count(')')
-            line_holder += line.replace('    ', '~').replace("\n", " \n ")
+            line_holder += line
             if parentheses_counter == 0:
-                clumped_lines.append(line_holder)
+                clumped_lines.append(line_holder.replace('    ',
+                                                         '~').replace("\n",
+                                                                      " \n ").replace(')',
+                                                                                      ' ) ').replace('(',
+                                                                                                     ' ( '))
                 line_holder = ''
 
         return clumped_lines
