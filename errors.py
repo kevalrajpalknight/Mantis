@@ -12,7 +12,7 @@ class Error:
         for item in location:
             string = item + ': ' + location.get(item)
             location_list.append(string)
-        location_str = ', '.join(location_list)
-        msg = type_err + ": found at " + location_str + ", lines where error occurred: \n" + "\n".join(lines) + "\n Additional information: " + traceback
+        location_str = ' -> '.join(location_list)
+        msg = type_err + ": found at " + location_str + "\nLines where error occurred: \n" + "\n".join(lines) + "\nAdditional information: \n" + traceback
         error_print(msg)
         sys.exit()
