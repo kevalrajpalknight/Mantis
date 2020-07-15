@@ -4,10 +4,14 @@ import tokens
 class Tokenizer:
     @staticmethod
     def tokenize(ms_file: str):
-        file = Tokenizer.format(ms_file)
+        """Formatted file"""
+        ff = Tokenizer.format(ms_file)
 
-        for file_line_number in range(len(file)):
-            pass
+        tokens= []
+
+        for line_num in range(len(ff)):
+            components = ff[line_num].split()
+            tokens.append(Tokenizer.tokenize_line(components))
 
     @staticmethod
     def format(ms_file: str):
@@ -58,5 +62,9 @@ class Tokenizer:
     def is_variable_reference(self, file_globals):
         pass
 
-    def tokenize_line(self, line):
-        pass
+    def tokenize_line(self, components):
+        keywords = {
+            'if': tokens.IF
+        }
+
+        return tokenized_line
