@@ -1,21 +1,4 @@
-import tokens
-
-
-def find_ops(ops: list, segment):
-    separated = []
-    char_holder = ''
-    for char in segment:
-        if char in ops:
-            if char_holder:
-                separated.append(char_holder)
-                char_holder = ''
-            separated.append(char)
-        else:
-            char_holder += char
-    if char_holder:
-        separated.append(char_holder)
-
-    return separated
+import tokens as tkns
 
 
 class Tokenizer:
@@ -24,11 +7,11 @@ class Tokenizer:
         """Formatted file"""
         ff = Tokenizer.format(ms_file)
 
-        tokens= []
+        tokens = []
 
         for line_num in range(len(ff)):
             components = ff[line_num].split()
-            tokens.append(Tokenizer.tokenize_line(components))
+            tokens.append(Tokenizer.tokenize_line(components=components))
 
     @staticmethod
     def format(ms_file: str):
@@ -83,9 +66,28 @@ class Tokenizer:
     def is_variable_reference(self, file_globals):
         pass
 
+    @staticmethod
+    def find_ops(ops, segment):
+        separated = []
+        char_holder = ''
+        for char in segment:
+            if char in ops:
+                if char_holder:
+                    separated.append(char_holder)
+                    char_holder = ''
+                separated.append(char)
+            else:
+                char_holder += char
+        if char_holder:
+            separated.append(char_holder)
+
+        return separated
+
+    @staticmethod
     def tokenize_line(self, components):
         keywords = {
-            'if': tokens.IF
+            'if': tkns.IF
         }
+        tokenized_line = ''
 
         return tokenized_line
