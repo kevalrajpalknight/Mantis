@@ -11,11 +11,6 @@ class Tokenizer:
 
         }
 
-        _syntax = {
-            'if': tokens.IF,
-
-        }
-
         print(ff)
 
 

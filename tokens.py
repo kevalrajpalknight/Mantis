@@ -1,7 +1,6 @@
 from errors import SyntaxErr
 
-def assign_token(chunk):
-
+def get_token(chunk):
     _syntax = {
         'if': IF,
         'loop': LOOP,
@@ -10,7 +9,8 @@ def assign_token(chunk):
         '-': OPERATION,
         '*': OPERATION,
         '/': OPERATION,
-        'output':
+        'output': OUTPUT,
+        'input': INPUT
     }
 
     for element in chunk:
@@ -84,6 +84,16 @@ class OUTPUT:
     def _exec(self):
         print(self.output)
 
+class INPUT:
+    def __init__(self, query: str):
+        self.query = query
+
+    def __repr__(self):
+        pass
+
+    def _exec(self):
+        pass
+
 
 # Define Variable functionality
 class VARIABLE:
@@ -114,23 +124,4 @@ class Num(Object):
 
     def __repr__(self):
         return f"{self.__class__.__name__} {self.number}"
-
-
-class List(Object):
-    def __init__(self, elements):
-        self.elements = elements
-
-    def __repr__(self):
-        return f"{self.__class__.__name__} {self.elements}"
-
-
-class Dict(Object):
-    def __init__(self, items):
-        self.items = items
-
-    def __dict__(self):
-        return {k: v for k, v in self.items}
-
-    def __repr__(self):
-        return f"{self.__class__.__name__} {self.__dict__()}"
 
