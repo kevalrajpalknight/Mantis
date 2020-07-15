@@ -26,5 +26,8 @@ loop char from "qwertyuiopasdfghjklzxcvbnm" (
 number = 0 + 1 + 2 / 3 * 8
 
 list_of_nums = [1, 2, 3, 4, 5, 6]
+# Here we will multiply all the values in list_of_nums
+
+2*all to list_of_nums.all
 
 output(list_of_nums)
