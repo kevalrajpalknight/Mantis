@@ -8,7 +8,8 @@ def get_tokens(chunk):
         'function': FUNCTION,
         'output': OUTPUT,
         'input': INPUT,
-        'pass': PASS
+        'pass': PASS,
+        'break': BREAK,
     }
 
     _exts = {
@@ -16,13 +17,17 @@ def get_tokens(chunk):
         '>=': COMPARISON,
         '==': COMPARISON,
         '!=': COMPARISON,
+        '+=': OPERATION,
+        '-=': OPERATION,
+        '++': OPERATION,
+        '--': OPERATION,
+        '//': OPERATION,
         '+': OPERATION,
         '-': OPERATION,
         '*': OPERATION,
         '/': OPERATION,
         '=': OPERATION,
         '%': OPERATION,
-        '//': OPERATION,
         '<': COMPARISON,
         '>': COMPARISON,
         '#': NEWLINE,
@@ -30,7 +35,7 @@ def get_tokens(chunk):
 
     tokens = {
         'variables': {},
-        'syntax_tree': []
+        'syntax_tree': {}
     }
 
     def set_variable(name, var_value):
@@ -40,9 +45,9 @@ def get_tokens(chunk):
         for bit in chunk:
             if item in bit:
                 loc = bit.find(item)
-                tokens['syntax_tree'].append(bit[:loc])
-                tokens['syntax_tree'].append(bit[loc:loc+len(item)])
-                tokens['syntax_tree'].append(bit[loc+len(item):])
+                tokens['syntax_tree'][bit[:loc]] = UNDEFINED
+                tokens['syntax_tree'][bit[loc:loc+len(item)]] = _exts.get(item)
+                tokens['syntax_tree'][bit[loc+len(item):]] = UNDEFINED
                 break
 
 
@@ -91,7 +96,17 @@ class PASS:
         pass
 
 
+class BREAK:
+    def _exec(self):
+        pass
+
+
 class NEWLINE:
+    def _exec(self):
+        pass
+
+
+class UNDEFINED:
     def _exec(self):
         pass
 
