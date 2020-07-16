@@ -1,3 +1,6 @@
-class Parser:
-    def __init__(self):
-        pass
+import sys
+from tokenizer import Interpeter
+
+file = sys.argv[1]
+
+

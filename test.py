@@ -1,4 +1,6 @@
 from tokenizer import Interpeter
+from errors import SyntaxErr
+
 
 interpreter = Interpeter()
 

@@ -7,11 +7,14 @@ class Interpeter:
         """Formatted file"""
         ff = [" ".join(line.split()) for line in Interpeter.format(ms_file)]
 
-        _memory = {}
+        _memory = {
+            'variables': {},
+            'action_tree': []
+        }
 
         for chunk in ff:
-            chunk_tokens = tokens.get_tokens(chunk)
-            print(chunk_tokens)
+            chunk_tokens = tokens.get_tokens(chunk.split())
+            print('Tokens',chunk_tokens)
 
             for key in chunk_tokens['variables']:
                 _memory['variables'][key] = chunk_tokens['variables'][key]
@@ -68,3 +71,8 @@ class Interpeter:
                 line_holder = ''
 
         return clumped_lines
+
+    @staticmethod
+    def execute_tree(action_tree, **global_variables):
+        for branch in action_tree:
+            global_variables = branch._exec(**global_variables)
