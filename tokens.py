@@ -43,6 +43,7 @@ def get_tokens(chunk):
                 tokens['syntax_tree'].append(bit[:loc])
                 tokens['syntax_tree'].append(bit[loc:loc+len(item)])
                 tokens['syntax_tree'].append(bit[loc+len(item):])
+                break
 
 
 
