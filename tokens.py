@@ -12,30 +12,44 @@ def get_tokens(chunk):
     }
 
     _exts = {
-        '+': OPERATION,
-        '-': OPERATION,
-        '*': OPERATION,
-        '/': OPERATION,
         '<=': COMPARISON,
         '>=': COMPARISON,
         '==': COMPARISON,
         '!=': COMPARISON,
-        '=>': COMPARISON,
-        '=<': COMPARISON,
+        '+': OPERATION,
+        '-': OPERATION,
+        '*': OPERATION,
+        '/': OPERATION,
+        '=': OPERATION,
+        '%': OPERATION,
+        '//': OPERATION,
+        '<': COMPARISON,
+        '>': COMPARISON,
+        '#': NEWLINE,
     }
 
     tokens = {
         'variables': {},
-        'action_tree': []
+        'syntax_tree': []
     }
 
-    def set_variable(name, value):
-        tokens['variables'][name] = value
+    def set_variable(name, var_value):
+        tokens['variables'][name] = var_value
+
+    for item in _exts:
+        for bit in chunk:
+            if item in bit:
+                loc = bit.find(item)
+                tokens['syntax_tree'].append(bit[:loc])
+                tokens['syntax_tree'].append(bit[loc:loc+len(item)])
+                tokens['syntax_tree'].append(bit[loc+len(item):])
+
+
 
     if chunk[0] in _keywords:
         # How many values to initialize the token object with.
         req_args_count = _keywords[chunk[0]].__init__.__code__.co_argcount - 1
-        # Take things from chunk and assign to initalization of the token object
+        # Take things from chunk and assign to initialization of the token object
         # print(chunk[0], 'takes', req_args_count, 'parameters')
         # print(chunk[1:])
 
@@ -72,6 +86,11 @@ class LOOP:
 
 
 class PASS:
+    def _exec(self):
+        pass
+
+
+class NEWLINE:
     def _exec(self):
         pass
 

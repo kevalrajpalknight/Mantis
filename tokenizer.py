@@ -12,9 +12,14 @@ class Interpeter:
             'action_tree': []
         }
 
+        _keys = '+-*/^#{}[](),.:;"\''
+
         for chunk in ff:
-            chunk_tokens = tokens.get_tokens(chunk.split())
-            print('Tokens',chunk_tokens)
+            # Separate _keys from the chunk
+            chunk_split = Interpeter.find_ops(_keys, chunk)
+            # Assign parts of chunk tokens
+            chunk_tokens = tokens.get_tokens(chunk_split)
+            print('Tokens', chunk_tokens)
 
             for key in chunk_tokens['variables']:
                 _memory['variables'][key] = chunk_tokens['variables'][key]
@@ -22,6 +27,27 @@ class Interpeter:
             _memory['action_tree'] += chunk_tokens['action_tree']
 
         return _memory
+
+    @staticmethod
+    def find_ops(ops, segment):
+        separated = []
+        char_holder = ''
+        for char in segment:
+            if char in ops:
+                if char_holder:
+                    separated.append(char_holder)
+                    char_holder = ''
+                separated.append(char)
+            elif char == ' ':
+                if char_holder:
+                    separated.append(char_holder)
+                    char_holder = ''
+            else:
+                char_holder += char
+        if char_holder:
+            separated.append(char_holder)
+
+        return separated
 
     @staticmethod
     def format(ms_file: str):
@@ -62,11 +88,8 @@ class Interpeter:
             line_holder += line
             if parentheses_counter == 0:
                 clumped_lines.append(
-                    line_holder
-                        .strip('\n')
-                        .replace('(', ' ( ')
-                        .replace(')', ' ) ')
-                        .replace('    ', '... ')
+                    line_holder.replace('\n', '#')
+                               .replace('    ', '~ ')
                 )
                 line_holder = ''
 
